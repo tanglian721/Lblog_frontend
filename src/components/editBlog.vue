@@ -13,6 +13,7 @@
 
 <script>
 import axios from "axios";
+import cookies from "vue-cookies"
 export default {
   name: "edit-blog",
   data() {
@@ -37,8 +38,8 @@ export default {
           },
           data: {
             content: this.content,
-            user_id: this.blog[5],
             blog_id: this.blog[3],
+            token: cookies.get("loginToken")
           },
         })
         .then((response) => {

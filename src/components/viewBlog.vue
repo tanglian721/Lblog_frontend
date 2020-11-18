@@ -1,6 +1,6 @@
 <template>
   <div class="view">
-      <single-blog v-for="blog in blogs" :key="blog[3]" :blog="blog" />
+      <single-blog v-for="blog in blogs" :key="blog[3]" :blog="blog" />   
   </div>
 </template>
 
@@ -10,11 +10,7 @@ import axios from "axios";
 export default {
   components: { singleBlog },
   name: "view-blog",
-  data() {
-      return {
-          blogs: []
-      }
-  },
+
   props:{
       blog:{
           type: Array,
@@ -28,11 +24,17 @@ export default {
               method: "GET"
           }).then((response) => {
               console.log(response.data);
-                this.blogs = response.data
+              this.$store.state.blogs = response.data
+                // this.blogs = response.data
           }).catch((error) => {
               console.log(error)
           })
           
+      }
+  },
+  computed: {
+      blogs() {
+          return this.$store.getters.blogList 
       }
   },
   mounted () {
@@ -48,6 +50,7 @@ export default {
     height: 90%;
     overflow-y: scroll;
     background-color: bisque;
+    filter: drop-shadow(0, 0, 15px bisque);
     &::-webkit-scrollbar{
         display: none;
     }

@@ -5,8 +5,8 @@
         <input v-model="title" type="text" />
         <p class="title">Content</p>
         <textarea name="" id="textarea" cols="30" rows="10" v-model="content"></textarea>
-        <p class="title">User ID</p>
-        <input id="user" v-model="user_id" type="text" />
+        <!-- <p class="title">User ID</p>
+        <input id="user" v-model="user_id" type="text" /> -->
         <br>
         <br>
         <button @click="NewBlog">submit</button>
@@ -15,6 +15,7 @@
 
 <script>
 import axios from "axios";
+import cookies from "vue-cookies"
     export default {
         name: "new-blog",
         data() {
@@ -36,7 +37,7 @@ import axios from "axios";
                     data: {
                         title:this.title,
                         content: this.content,
-                        user_id: this.user_id
+                        token: cookies.get("loginToken")
                     }
                 }).then((response) => {
                     console.log(response.data)

@@ -6,6 +6,8 @@
 
 <script>
 import axios from "axios";
+import cookies from "vue-cookies"
+
 export default {
   name: "delete-blog",
   props: {
@@ -26,6 +28,7 @@ export default {
           },
           data: {
             blog_id: this.blog[3],
+            token: cookies.get("loginToken")
           },
         })
         .then((response) => {

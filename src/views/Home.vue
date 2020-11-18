@@ -2,6 +2,7 @@
   <div class="home">
     <div id="loginShow" v-if="loginStatus">
       <h1>L-BLOG</h1>
+      <button @click="logout" id="logout">Logout</button>
       <div class="main">
         <new-blog />
         <view-blog />
@@ -36,6 +37,10 @@ export default {
         this.$router.push("/login")
       }
       console.log(this.loginStatus)
+    },
+    logout(){
+      cookies.remove("loginToken")
+      this.$router.push("/login")
     }
   },
   mounted () {
@@ -53,13 +58,21 @@ export default {
     h1 {
       box-sizing: border-box;
       width: 100%;
-      height: 15%;
+      height: 10%;
       text-align: center;
       padding: 5vh 0;
+      color: white;
+      letter-spacing: 10px;
       font-family: "Merriweather Sans", sans-serif;
+      display: inline-block;
+    }
+    #logout{
+      position: fixed;
+      right: 10vw;
+      top: 5vh;
     }
     .main {
-      height: 85%;
+      height: 90%;
       display: grid;
       grid-template-columns: 1fr 2fr;
       align-items: center;
