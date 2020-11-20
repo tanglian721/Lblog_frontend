@@ -2,18 +2,18 @@
   <div class="single">
     <div class="title">
       <p class="tit-title">Title:</p>
-      <p class="tit-con">{{ blog[0] }}</p>
+      <p class="tit-con">{{ blog.title }}</p>
     </div>
     <div class="content">
-      <p class="con-con">{{ blog[1] }}</p>
+      <p class="con-con">{{ blog.content }}</p>
     </div>
     <div class="user">
       <p class="user-title">Writer :</p>
-      <p class="user-con">{{ blog[4] }}</p>
+      <p class="user-con">{{ blog.username }}</p>
     </div>
     <div class="time">
       <p class="time-title">Created at :</p>
-      <p class="time-con">{{ blog[2] }}</p>
+      <p class="time-con">{{ blog.created_at }}</p>
     </div>
     <div class="modify" v-if="if_owener">
       <button @click="IfEdit">edit</button>
@@ -21,7 +21,7 @@
         <delete-blog :blog="blog" />
       </div>
       <br />
-      <edit-blog v-if="if_edit" :blog="blog" />
+      <edit-blog v-if="if_edit" :blog="blog" @editShow="closeEdit"/>
     </div>
   </div>
 </template>
@@ -41,7 +41,7 @@ export default {
   },
   props: {
     blog: {
-      type: Array,
+      type: Object,
       requried: true,
     },
   },
@@ -50,9 +50,12 @@ export default {
       this.if_edit = !this.if_edit;
     },
     checkOwener(){
-      if(cookies.get('users').user_id == this.blog[5]){
+      if(cookies.get('users').user_id == this.blog.user_id){
         this.if_owener = true
       }
+    },
+    closeEdit(data) {
+      this.if_edit = data
     }
   },
   mounted () {

@@ -13,14 +13,14 @@ export default {
 
   props:{
       blog:{
-          type: Array,
+          type: Object,
           requried: true
       }
   },
   methods: {
       ViewBlog() {
           axios.request({
-              url: "http://127.0.0.1:5000/blog",
+              url: "http://lblog.ml/api/blog",
               method: "GET"
           }).then((response) => {
               console.log(response.data);

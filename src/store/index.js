@@ -7,7 +7,11 @@ export default new Vuex.Store({
     state: {
         blogs: []
     },
-    mutations: {},
+    mutations: {
+        fakeAdd(state, data) {
+            state.blogs.unshift(data)
+        }
+    },
     actions: {},
     modules: {},
     getters: {

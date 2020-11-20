@@ -29,7 +29,7 @@ import cookies from "vue-cookies"
         methods: {
             NewBlog() {
                 axios.request({
-                    url: "http://127.0.0.1:5000/blog",
+                    url: "http://lblog.ml/api/blog",
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -42,6 +42,7 @@ import cookies from "vue-cookies"
                 }).then((response) => {
                     console.log(response.data)
                     this.newBlog = response.data
+                    this.$store.commit("fakeAdd", this.newBlog)
                 }).catch((error) => {
                     console.log(error)
                 })

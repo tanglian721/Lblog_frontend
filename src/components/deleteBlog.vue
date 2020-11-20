@@ -12,27 +12,32 @@ export default {
   name: "delete-blog",
   props: {
     blog: {
-      type: Array,
+      type: Object,
       requried: true,
     },
   },
   methods: {
     deleteBlog() {
-        console.log(this.blog[3])
+        console.log(this.blog.id)
       axios
         .request({
-          url: "http://127.0.0.1:5000/blog",
+          url: "http://lblog.ml/api/blog",
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
           },
           data: {
-            blog_id: this.blog[3],
+            blog_id: this.blog.id,
             token: cookies.get("loginToken")
           },
         })
         .then((response) => {
           console.log(response.data);
+          for(let i = 0; i < this.$store.state.blogs.length; i++){
+            if (this.$store.state.blogs[i].id == this.blog.id){
+              this.$store.state.blogs.splice(i, 1)
+            }
+          }
         })
         .catch((error) => {
           console.log(error);
